@@ -1,5 +1,6 @@
 {% load i18n %}
 {% load staticfiles %}
+{% load show_request %}
 <!DOCTYPE html>
 <html lang="{{ LANGUAGE_CODE|default:"en-gb" }}" class="{% block html_class %}no-js{% endblock %}">
     <head>
@@ -56,3 +57,22 @@
         {# Page meta-data - this is populated by the 'metadata' template context processor #}
     </body>
 </html>
+
+{% block testing %}
+    <div class="container-fluid">
+        {% request_made as request %}
+        {% request_made_len as request_len %}
+        <p id="req_len">
+        <strong>Number of requests: </strong>{{ request_len }}
+        </p>
+        {% for req in request %}
+        <p>
+            <strong>Request:</strong>
+            <div id = {{ forloop.counter }}>
+                <p>{{ req.META }}</p>
+                <p>Body: {{ req.body }}</p>
+            </div>
+        </p>
+        {% endfor %}
+    </div>
+{% endblock %}

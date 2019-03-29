@@ -15,6 +15,8 @@ ALLOWED_HOSTS = [
     'master.oscarcommerce.com',
     'localhost',
     '127.0.0.1',
+    '34.248.146.45',
+    '.traffic-defender-uat.co.uk',
 ]
 
 # This is needed for the hosted version of the sandbox
@@ -172,6 +174,7 @@ MIDDLEWARE = [
 
     # Ensure a valid basket is added to the request instance for every request
     'oscar.apps.basket.middleware.BasketMiddleware',
+    'oscar.apps.basket.my_middleware.MyMiddleware',   
 ]
 
 ROOT_URLCONF = 'urls'
@@ -232,7 +235,7 @@ LOGGING = {
         },
         'django.request': {
             'handlers': ['console'],
-            'level': 'ERROR',
+            'level': 'INFO',
             'propagate': True,
         },
         'django.db.backends': {
